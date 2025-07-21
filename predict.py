@@ -9,8 +9,8 @@ class Predictor(BasePredictor):
     def setup(self):
         self.pipe = StableDiffusionXLPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0",
-            torch_dtype=torch.float16
-        ).to("cuda")
+            torch_dtype=torch.float32
+        ).to("cpu")
         self.pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(self.pipe.scheduler.config)
 
     def predict(
